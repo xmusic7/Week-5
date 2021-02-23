@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number</title>
+</head>
+<body>
+    <h1>Guess the number!</h1>
+    <h2>Enter the Number</h2>
+    <input type="number" name="number" id="userguess">
+    <button onclick="buttonClicked()" id="guessBtn">Click me!</button>
+    <button onclick="restartgame()" id="restartBtn" hidden="true">Restart Game</button>
+    <p id="message"></p>
+</body>
+<script type="text/javascript">
+    var random = Math.ceil(Math.random()*100);
+    var chances = 5;
+    function buttonClicked(){
+
+        // Retrieved the value from the input with id userguess
+        var userguess = document.getElementById("userguess").value
+
+        if (userguess>random){
+          document.getElementById("message").innerHTML = "Number too high";
+          chances--
+        }
+        else if (userguess<random){
+          document.getElementById("message").innerHTML = "Number too low";
+          chances--
+        }
+        else {
+          document.getElementById("message").innerHTML = "Congratulation, you win";
+          document.getElementById("restartBtn").removeAttribute("hidden")
+          document.getElementById("guessBtn").setAttribute("disabled",true);
+        }
+        if (chances <= 0){
+           alert("You are out of chances. The number is " +random)
+           document.getElementById("restartBtn").removeAttribute("hidden")
+            document.getElementById("guessBtn").setAttribute("disabled",true);
+        }
+        document.getElementById("userguess").value ="";
+    }
+
+    function restartgame(){
+    // reset chances
+    chances = 5;
+
+    // enable guessBtn
+    document.getElementById("guessBtn").removeAttribute("disabled");
+
+    // generate a new random number
+    random = Math.ceil(Math.random()*100);
+    // hide restart button
+    document.getElementById("restartBtn").setAttribute("hidden",true);
+    // clear the message
+    document.getElementById("message").innerHTML = "";
+    }
+</script>
+</html>
