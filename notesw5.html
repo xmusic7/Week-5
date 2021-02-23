@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Week 5 notes</title>
+</head>
+<body>
+	<h1>DOM Manipulation</h1>
+	<input type="text" id="nameInput" placeholder="Enter your name">
+	<button onclick="pressActivate()" id="deactivateBtn">Deactivate Button</button>
+	<button onclick="pressMe()" id="btnPress">Press Me!</button>
+	
+	<p id="message"></p>
+
+	<hr>
+	<h2>To do list</h2>
+	<input type="text" id="newtodo" placeholder="Add new todo">
+	<button onclick="addPress()">Add</button>
+	<ul id="itemList">
+		
+	</ul>
+
+	<hr>
+
+<h1>Adress book</h1>
+	<input type="text" id="addressName" placeholder="Enter your name">
+	<input type="text" id="addressEmail" placeholder="Enter your email">
+	<input type="text" id="addressPhone" placeholder="Enter your phone">
+	<button onclick="addAddress()">Add address</button>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Phone</th>
+			</tr>
+		</thead>
+		<tbody id="tableBody">
+			<tr>
+				<td>Rahimi</td>
+				<td>rahimi.orange</td>
+				<td>1233123</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+
+<script type="text/javascript">
+	function addAddress(){
+
+		// 1) Get the value from input
+		var name = document.getElementById("addressName").value;
+		var email = document.getElementById("addressEmail").value;
+		var phone = document.getElementById("addressPhone").value
+
+		// 2) Create new Element - td x 3
+
+		var td1 = document.createElement("td");
+		var td2 = document.createElement("td");
+		var td3 = document.createElement("td");
+
+		// 3) Inside td put innderHTML (1) x 3
+
+		td1.innerHTML = name;
+		td2.innerHTML = email;
+		td3.innerHTML = phone;
+
+		// 4) Create tr . . .
+
+		var newTr = document.createElement("tr");
+
+
+		// 5) Append td to tr x 3
+
+		newTr.appendChild(td1);
+		newTr.appendChild(td2);
+		newTr.appendChild(td3);
+
+		// 6) append tr to tbody
+		
+		document.getElementById("tableBody").appendChild(newTr);
+
+	}
+
+	function addPress(){
+
+		// 1) Get the value from input
+		var newTodo = document.getElementById("newtodo").value;
+
+		// 2) Create new Element - li
+		var newLi = document.createElement("li")
+
+		// 3) Inside li put innderHTML (1)
+
+		newLi.innerHTML = newTodo;
+
+		// 4) Append li to itemList
+		document.getElementById("itemList").append(newLi);
+
+	}
+	function pressActivate(){
+		if (document.getElementById("btnPress").disabled == true){
+			document.getElementById("btnPress").removeAttribute("disabled")
+			document.getElementById("deactivateBtn").innerHTML = "Deactivate button";
+		}
+			else {
+		document.getElementById("btnPress").setAttribute("disabled" , true);
+		document.getElementById("deactivateBtn").innerHTML = "Activate button";
+		}
+	}
+
+	function pressMe(){
+
+		// When ot is on the right side, it's a getter (we get the value from it)
+		var name = document.getElementById("nameInput").value;
+		// alert("Hello "+name);
+		
+		document.getElementById("message").innerHTML = "Helo "+name
+		// Wheb it is on the left, it is a sett (we set a value into it)
+		document.getElementById("nameInput").value = "";
+
+		document.getElementById("newtodo").value = "";
+
+		
+	}		
+
+</script>
+</body>
+</html>
